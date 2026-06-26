@@ -1,7 +1,7 @@
 import { RefreshCcw } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { Button } from '@components/button'
-import { Card, CardDescription } from '@components/card'
+import { Button } from '../ui/button'
+import { Card, CardDescription } from '../ui/card'
 import { FACTS } from '~/components/index/Facts'
 import { ClientOnly } from '~/components/ClientOnly'
 

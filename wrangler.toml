@@ -1,15 +1,13 @@
 name = "cf-worker"
 
 workers_dev = true
-main = "./build/index.js"
+main = "./workers/app.ts"
 # https://developers.cloudflare.com/workers/platform/compatibility-dates
-compatibility_date = "2023-04-20"
+compatibility_date = "2026-06-26"
+compatibility_flags = ["nodejs_compat"]
 routes = [{ pattern = "kin.codes", custom_domain = true }]
 
 [vars]
 
-[site]
-  bucket = "./public"
-
-[build]
-  command = "npm run build"
+[assets]
+  directory = "./build/client"

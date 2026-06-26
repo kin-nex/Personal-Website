@@ -1,4 +1,4 @@
-import { Card } from '@components/card'
+import { Card } from '../ui/card'
 import { useRef } from 'react'
 import { useIntersectionObserver } from '~/hooks/useIntersectionObserver'
 import { cn } from '~/utils'

@@ -1,5 +1,5 @@
-import { Separator } from '@components/separator'
-import { Link } from '@remix-run/react'
+import { Separator } from '../ui/separator'
+import { Link } from 'react-router';
 
 export const LifeQuote = () => (
   <div className="mx-auto flex w-fit flex-col space-y-6 rounded-lg border p-6">

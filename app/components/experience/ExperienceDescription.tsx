@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@components/card'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { ReactNode } from 'react'
 
 interface Props {

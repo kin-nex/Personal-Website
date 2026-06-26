@@ -3,7 +3,6 @@ import { AmazonPVWeb } from './AmazonPVWeb'
 import { Arcane } from './Arcane'
 import { MindfulChef } from './MindfulChef'
 import { PAConsulting } from './PAConsulting'
-import { Xata } from './Xata'
 import { Cytora } from './Cytora'
 
 export {
@@ -12,6 +11,5 @@ export {
   Arcane,
   MindfulChef,
   PAConsulting,
-  Xata,
   Cytora,
 }

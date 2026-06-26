@@ -1,18 +1,28 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "remix.config.js"],
+  "include": [
+    "remix.env.d.ts",
+    ".react-router/types/**/*",
+    "**/*.ts",
+    "**/*.tsx",
+    "react-router.config.ts",
+    "vite.config.ts"
+  ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2020"],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "target": "ESNext",
+    "types": ["@cloudflare/workers-types", "node"],
     "strict": true,
     "allowJs": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
+    "rootDirs": [".", "./.react-router/types"],
     "paths": {
       "@components/*": ["./app/components/ui/*"],
       "~/*": ["./app/*"]

@@ -1,6 +1,11 @@
-import { ReactNode, useState } from 'react'
-import { Link } from '@remix-run/react'
-import { Button } from '@components/button'
+import {
+  CSSProperties,
+  forwardRef,
+  HTMLAttributes,
+  ReactNode,
+  useState,
+} from 'react'
+import { Link } from 'react-router';
 import { Separator } from '@components/separator'
 import {
   Tooltip,
@@ -18,8 +23,6 @@ import {
   MailIcon,
 } from 'lucide-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@components/popover'
-import { PopoverAnchor } from '@radix-ui/react-popover'
-import { ClientOnly } from '~/components/ClientOnly'
 
 interface Social {
   friendlyName: string
@@ -44,8 +47,8 @@ const SOCIALS: Social[] = [
   {
     friendlyName: 'GitHub',
     Icon: GithubIcon,
-    colour: '#171515',
-    url: 'https://github.com/ESalih-Dev',
+    colour: '#8b949e',
+    url: 'https://github.com/kin-nex',
   },
 ]
 
@@ -60,50 +63,55 @@ const TooltipWrapper = ({
 }) => (
   <TooltipProvider delayDuration={200}>
     <Tooltip defaultOpen={defaultOpen}>
-      <TooltipTrigger>{children}</TooltipTrigger>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
       <TooltipContent>{text}</TooltipContent>
     </Tooltip>
   </TooltipProvider>
 )
 
-const SocialButton = ({ Icon, colour, url }: Omit<Social, 'friendlyName'>) => {
-  const [hovering, setHovering] = useState(false)
+const SocialButton = forwardRef<
+  HTMLDivElement,
+  Omit<Social, 'friendlyName'> & HTMLAttributes<HTMLDivElement>
+>(({ Icon, colour, url, style, ...props }, ref) => {
+    const iconComponent = (
+      <Icon
+        className="h-14 w-14 transition-colors duration-500 group-hover:text-[var(--social-hover-color)]"
+      />
+    )
 
-  const flipHoveringState = () => setHovering(!hovering)
+    return (
+      <div
+        {...props}
+        ref={ref}
+        key={url}
+        className="group flex items-center justify-center"
+        style={
+          {
+            ...style,
+            '--social-hover-color': colour,
+          } as CSSProperties
+        }
+      >
+        {url ? (
+          <Link to={url} target="_blank" rel="noopener noreferrer">
+            {iconComponent}
+          </Link>
+        ) : (
+          iconComponent
+        )}
+      </div>
+    )
+  })
 
-  const iconComponent = (
-    <Icon
-      className="h-14 w-14 transition-colors duration-500"
-      {...(hovering && { color: colour })}
-    />
-  )
-
-  return (
-    <div
-      key={url}
-      className="flex items-center justify-center"
-      onMouseEnter={flipHoveringState}
-      onMouseLeave={flipHoveringState}
-    >
-      {url ? (
-        <Link to={url} target="_blank" rel="noopener noreferrer">
-          {iconComponent}
-        </Link>
-      ) : (
-        iconComponent
-      )}
-    </div>
-  )
-}
+SocialButton.displayName = 'SocialButton'
 
 const EmailPopover = ({
   email,
-  children,
 }: {
   email: string
-  children: ReactNode
 }) => {
   const [copied, setCopied] = useState(false)
+  const [hovering, setHovering] = useState(false)
 
   const copyToClipboard = () => {
     var range = document.createRange()
@@ -117,7 +125,26 @@ const EmailPopover = ({
 
   return (
     <Popover>
-      <PopoverTrigger>{children}</PopoverTrigger>
+      <TooltipProvider delayDuration={200}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className="flex items-center justify-center"
+                onMouseEnter={() => setHovering(true)}
+                onMouseLeave={() => setHovering(false)}
+              >
+                <MailIcon
+                  className="h-14 w-14 transition-colors duration-500"
+                  {...(hovering && { color: '#FFC629' })}
+                />
+              </button>
+            </PopoverTrigger>
+          </TooltipTrigger>
+          <TooltipContent>Email</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <PopoverContent
         className="w-fit"
         onOpenAutoFocus={(event) => {
@@ -157,14 +184,6 @@ export const Socials = () => (
         <Separator className="mx-3 h-auto md:mx-8" orientation="vertical" />
       </div>
     ))}
-    <EmailPopover email="erkin_salih@hotmail.com">
-      <ClientOnly>
-        {() => (
-          <TooltipWrapper text="Email">
-            <SocialButton Icon={MailIcon} colour="#FFC629" />
-          </TooltipWrapper>
-        )}
-      </ClientOnly>
-    </EmailPopover>
+    <EmailPopover email="erkin_salih@hotmail.com" />
   </div>
 )

@@ -4,7 +4,6 @@ export type JobID =
   | 'AmazonPVWeb'
   | 'MindfulChef'
   | 'Arcane'
-  | 'Xata'
   | 'Cytora'
 
 export type CompanySize =

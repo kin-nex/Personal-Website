@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { MetaFunction } from '@remix-run/cloudflare'
+import { MetaFunction } from 'react-router';
 import { CompanyExperience } from '~/components/experience/CompanyExperience'
 import { CompanyHint } from '~/components/experience/CompanyHint'
 import { JobID } from '~/components/experience/ExperienceUtils'
@@ -10,7 +10,6 @@ import {
   AmazonPVWeb,
   MindfulChef,
   Arcane,
-  Xata,
   Cytora,
 } from '~/components/experience/CompanyInfo/index'
 import { CompanyInfo } from '~/components/experience/CompanyInfo/index.types'
@@ -23,7 +22,6 @@ export const EXPERIENCE: Record<JobID, CompanyInfo> = {
   AmazonPVWeb,
   MindfulChef,
   Arcane,
-  Xata,
   Cytora,
 }
 
@@ -33,7 +31,7 @@ export const meta: MetaFunction = () => {
     {
       name: 'description',
       content:
-        'Look back in history at my experience working at Amazon, Mindful Chef, Arcane & Xata',
+        'Look back in history at my experience working at Amazon, Mindful Chef, Arcane & Cytora',
     },
   ]
 }
@@ -44,7 +42,7 @@ const Experience = () => {
   const [experience, setExperience] = useState<JobID | undefined>()
 
   useEffect(() => {
-    if (isMobileDevice) setTimeout(() => setExperience('Xata'), 700)
+    if (isMobileDevice) setTimeout(() => setExperience('Cytora'), 700)
   }, [])
 
   const handleKeyPress = (e: KeyboardEvent) => {

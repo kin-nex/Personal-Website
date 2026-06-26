@@ -1,11 +1,11 @@
-import { Link } from '@remix-run/react'
+import { Link } from 'react-router';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@components/card'
+} from '../ui/card'
 import { Linkedin } from 'lucide-react'
 import { TechnologyBadge } from '~/components/experience/TechnologyBadge'
 import {
@@ -13,7 +13,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@components/tooltip'
+} from '../ui/tooltip'
 import { CompanyInfo } from './CompanyInfo/index.types'
 
 export const ExperienceInfo = ({
@@ -51,7 +51,7 @@ export const ExperienceInfo = ({
         </div>
         <TooltipProvider delayDuration={200}>
           <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               <Link
                 to={linkedInUrl}
                 target="_blank"

@@ -1,17 +1,15 @@
-import type { LinksFunction, MetaFunction } from '@remix-run/cloudflare'
-import { cssBundleHref } from '@remix-run/css-bundle'
+import type { LinksFunction, MetaFunction } from 'react-router';
+import type { ReactNode } from 'react'
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
-  PrefetchPageLinks,
   Scripts,
   ScrollRestoration,
-} from '@remix-run/react'
-import styles from '~/globals.css'
-import { PageToggle } from '~/components/PageToggle'
-import { CodeSource } from '~/components/CodeSource'
+} from 'react-router';
+import styles from './globals.css?url'
+import { PageToggle } from './components/PageToggle'
+import { CodeSource } from './components/CodeSource'
 
 export const meta: MetaFunction = () => [
   { title: "It's Kin 🥶" },
@@ -38,10 +36,10 @@ export const links: LinksFunction = () => [
     href: '/favicon-16x16.png',
   },
   { rel: 'manifest', href: '/site.webmanifest' },
-  ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ]
 
-const App = () => (
+export function Layout({ children }: { children: ReactNode }) {
+  return (
   <html lang="en" className="dark">
     <head>
       <meta charSet="utf-8" />
@@ -50,18 +48,18 @@ const App = () => (
       <Links />
     </head>
     <body className="container relative min-h-screen">
-      <PrefetchPageLinks page="/" />
-      <PrefetchPageLinks page="/experience" />
       <PageToggle />
       <div className="absolute right-4 mt-2 sm:right-8 sm:mr-2 sm:mt-4">
         <CodeSource />
       </div>
-      <Outlet />
+      {children}
       <ScrollRestoration />
       <Scripts />
-      <LiveReload />
     </body>
   </html>
-)
+  )
+}
+
+const App = () => <Outlet />
 
 export default App
