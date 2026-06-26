@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 
 export const useAnimatedSelection = <T,>(
   selected: T | undefined,
-  timeout = 500
+  timeout = 500,
+  immediateSwap = false
 ) => {
   const [state, setState] = useState<{
     rendered: T | undefined
@@ -48,6 +49,14 @@ export const useAnimatedSelection = <T,>(
       return
     }
 
+    if (immediateSwap) {
+      setAnimatedState({ rendered: selected, isVisible: false })
+      frameRef.current = requestAnimationFrame(() =>
+        setAnimatedState({ rendered: selected, isVisible: true })
+      )
+      return
+    }
+
     setAnimatedState({
       rendered: stateRef.current.rendered,
       isVisible: false,
@@ -63,7 +72,7 @@ export const useAnimatedSelection = <T,>(
       if (timeoutRef.current) clearTimeout(timeoutRef.current)
       if (frameRef.current) cancelAnimationFrame(frameRef.current)
     }
-  }, [selected, timeout])
+  }, [immediateSwap, selected, timeout])
 
   return state
 }

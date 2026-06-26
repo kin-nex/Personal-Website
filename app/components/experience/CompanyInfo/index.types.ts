@@ -8,6 +8,7 @@ import {
 export interface CompanyInfo {
   id: JobID
   logoUrl: string
+  logoClassName?: string
   companyName: string
   companyUrl: string
   team?: string

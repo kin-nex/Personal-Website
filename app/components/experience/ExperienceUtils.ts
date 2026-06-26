@@ -5,6 +5,7 @@ export type JobID =
   | 'MindfulChef'
   | 'Arcane'
   | 'Cytora'
+  | 'BestBuyHealth'
 
 export type CompanySize =
   | '1 - 10'
@@ -27,7 +28,13 @@ export const Language = [
 ] as const
 type Language = (typeof Language)[number]
 
-export const Libraries = ['React', 'Remix', 'NextJS', 'Redux'] as const
+export const Libraries = [
+  'React',
+  'Remix',
+  'NextJS',
+  'Redux',
+  'Spring Boot',
+] as const
 type Libraries = (typeof Libraries)[number]
 
 export const Styling = ['MUI', 'ChakraUI', 'TailwindCSS'] as const

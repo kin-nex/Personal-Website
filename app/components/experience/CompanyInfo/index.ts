@@ -4,6 +4,7 @@ import { Arcane } from './Arcane'
 import { MindfulChef } from './MindfulChef'
 import { PAConsulting } from './PAConsulting'
 import { Cytora } from './Cytora'
+import { BestBuyHealth } from './BestBuyHealth'
 
 export {
   AmazonPVIOS,
@@ -12,4 +13,5 @@ export {
   MindfulChef,
   PAConsulting,
   Cytora,
+  BestBuyHealth,
 }

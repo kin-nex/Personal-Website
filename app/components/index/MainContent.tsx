@@ -4,6 +4,7 @@ import { Button } from '../ui/button'
 import { Card, CardDescription } from '../ui/card'
 import { FACTS } from '~/components/index/Facts'
 import { ClientOnly } from '~/components/ClientOnly'
+import { AnimatedRoleHeadline } from '~/components/index/AnimatedRoleHeadline'
 
 const getFactNumber = (prev?: number): number => {
   const getPosition = () => Math.floor(Math.random() * FACTS.length)
@@ -53,9 +54,7 @@ export const MainContent = () => (
       <h1 className="relative mb-4 animate-fade-up text-xl font-light">
         Hi, i'm kin 🙂
       </h1>
-      <h2 className="relative mb-16 animate-fade-up text-4xl font-bold tracking-wider">
-        Front-end engineer with a passion for travelling and eating
-      </h2>
+      <AnimatedRoleHeadline />
       <ClientOnly>{() => <RandomFactGenerator />}</ClientOnly>
     </div>
     <div className="md:w-5/6 lg:w-2/5">

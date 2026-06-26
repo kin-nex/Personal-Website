@@ -18,6 +18,7 @@ import { CompanyInfo } from './CompanyInfo/index.types'
 
 export const ExperienceInfo = ({
   logoUrl,
+  logoClassName,
   companyName,
   companyUrl,
   team,
@@ -34,7 +35,7 @@ export const ExperienceInfo = ({
             <img
               src={logoUrl}
               alt={`${companyName} logo`}
-              className="h-6 w-6 rounded-sm"
+              className={`h-6 w-6 rounded-sm object-contain ${logoClassName ?? ''}`}
             />
             <Link
               to={companyUrl}

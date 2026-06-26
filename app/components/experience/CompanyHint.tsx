@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const CompanyHint = ({ experience }: Props) => {
-  const { rendered, isVisible } = useAnimatedSelection(experience)
+  const { rendered, isVisible } = useAnimatedSelection(experience, 300, true)
   const experienceInfo = rendered && EXPERIENCE[rendered]
 
   return (
@@ -24,14 +24,14 @@ export const CompanyHint = ({ experience }: Props) => {
       {experienceInfo && (
         <>
           <img
-            className={`duration-400 h-6 w-6 rounded-md transition-all ${
+            className={`h-6 w-6 rounded-md object-contain transition-all duration-300 ${
               isVisible ? '' : 'mb-6 opacity-0'
-            }`}
+            } ${experienceInfo.logoClassName ?? ''}`}
             src={experienceInfo.logoUrl}
             alt={`${experienceInfo.companyName} logo`}
           />
           <div
-            className={`duration-400 items-end transition-all ${
+            className={`items-end transition-all duration-300 ${
               isVisible ? '' : 'mb-6 opacity-0'
             }`}
           >

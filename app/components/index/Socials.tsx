@@ -179,7 +179,11 @@ export const Socials = () => (
     {SOCIALS.map((social) => (
       <div key={social.friendlyName} className="flex flex-row">
         <TooltipWrapper text={social.friendlyName}>
-          <SocialButton {...social} />
+          <SocialButton
+            Icon={social.Icon}
+            colour={social.colour}
+            url={social.url}
+          />
         </TooltipWrapper>
         <Separator className="mx-3 h-auto md:mx-8" orientation="vertical" />
       </div>
