@@ -6,6 +6,7 @@ export type JobID =
   | 'Arcane'
   | 'Cytora'
   | 'BestBuyHealth'
+  | 'Accro'
 
 export type CompanySize =
   | '1 - 10'
@@ -25,6 +26,7 @@ export const Language = [
   'Swift',
   'Objective-C',
   'Python',
+  'Go',
 ] as const
 type Language = (typeof Language)[number]
 
@@ -34,10 +36,11 @@ export const Libraries = [
   'NextJS',
   'Redux',
   'Spring Boot',
+  'React Router',
 ] as const
 type Libraries = (typeof Libraries)[number]
 
-export const Styling = ['MUI', 'ChakraUI', 'TailwindCSS'] as const
+export const Styling = ['MUI', 'ChakraUI', 'TailwindCSS', 'ShadCN'] as const
 type Styling = (typeof Styling)[number]
 
 export type Technology = Language | Libraries | Styling

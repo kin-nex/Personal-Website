@@ -5,6 +5,7 @@ import { MindfulChef } from './MindfulChef'
 import { PAConsulting } from './PAConsulting'
 import { Cytora } from './Cytora'
 import { BestBuyHealth } from './BestBuyHealth'
+import { Accro } from './Accro'
 
 export {
   AmazonPVIOS,
@@ -14,4 +15,5 @@ export {
   PAConsulting,
   Cytora,
   BestBuyHealth,
+  Accro,
 }

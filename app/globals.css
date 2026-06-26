@@ -60,22 +60,32 @@
 
 @layer components {
   .hero-role-headline {
-    --role-step: 1.15s;
+    --role-step: 2.05s;
+    --character-step: 42ms;
     --role-grey: hsl(var(--muted-foreground));
     --role-strike: hsl(var(--muted-foreground) / 0.72);
+    --role-strike-buffer: 0.52s;
+    --role-strike-duration: 0.42s;
   }
 
   .hero-role-line {
     animation-delay: calc(var(--role-index) * var(--role-step));
-    animation-duration: 1.55s;
+    animation-duration: calc(
+      var(--role-type-duration) + var(--role-strike-buffer) +
+        var(--role-strike-duration)
+    );
     animation-fill-mode: forwards;
     animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     color: white;
     display: block;
     opacity: 0;
     position: relative;
-    transform: translateY(0.8rem);
     width: fit-content;
+    max-width: 100%;
+  }
+
+  .hero-role-line + .hero-role-line {
+    margin-top: 0.18em;
   }
 
   .hero-role-line::after {
@@ -90,39 +100,50 @@
     width: calc(100% + 0.08em);
   }
 
+  .hero-role-sizer {
+    visibility: hidden;
+  }
+
+  .hero-role-text {
+    display: inline;
+  }
+
+  .hero-role-character {
+    animation: hero-role-character 0.01s linear forwards;
+    animation-delay: calc(
+      (var(--role-index) * var(--role-step)) +
+        (var(--character-index) * var(--character-step))
+    );
+    opacity: 0;
+  }
+
   .hero-role-line-passed {
     animation-name: hero-role-pass;
   }
 
   .hero-role-line-passed::after {
-    animation: hero-role-strike 0.42s cubic-bezier(0.22, 1, 0.36, 1)
-      forwards;
-    animation-delay: calc((var(--role-index) * var(--role-step)) + 0.58s);
+    animation: hero-role-strike var(--role-strike-duration)
+      cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(
+      (var(--role-index) * var(--role-step)) + var(--role-type-duration) +
+        var(--role-strike-buffer)
+    );
   }
 
   .hero-role-line-final {
     animation-name: hero-role-final;
   }
 
-  .hero-role-sentence {
-    animation: hero-role-sentence 0.7s cubic-bezier(0.22, 1, 0.36, 1)
-      forwards;
-    animation-delay: calc((3 * var(--role-step)) + 0.72s);
-    color: white;
-    display: inline;
-    opacity: 0;
-    transform: translateY(0.7rem);
-  }
 }
 
 @keyframes hero-role-pass {
   0% {
     color: white;
     opacity: 0;
-    transform: translateY(0.8rem);
+    transform: translateY(0);
   }
-  22%,
-  50% {
+  3%,
+  66% {
     color: white;
     opacity: 1;
     transform: translateY(0);
@@ -137,11 +158,18 @@
 @keyframes hero-role-final {
   0% {
     opacity: 0;
-    transform: translateY(0.8rem);
+    transform: translateY(0);
   }
+  3%,
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes hero-role-character {
+  100% {
+    opacity: 1;
   }
 }
 
@@ -154,22 +182,15 @@
   }
 }
 
-@keyframes hero-role-sentence {
-  0% {
-    opacity: 0;
-    transform: translateY(0.7rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-role-line,
   .hero-role-line::after,
-  .hero-role-sentence {
+  .hero-role-character {
     animation: none;
+  }
+
+  .hero-role-character {
+    opacity: 1;
   }
 
   .hero-role-line-passed {
@@ -182,8 +203,7 @@
     transform: translateY(-50%) scaleX(1);
   }
 
-  .hero-role-line-final,
-  .hero-role-sentence {
+  .hero-role-line-final {
     opacity: 1;
     transform: none;
   }

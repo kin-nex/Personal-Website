@@ -12,6 +12,7 @@ import {
   Arcane,
   Cytora,
   BestBuyHealth,
+  Accro,
 } from '~/components/experience/CompanyInfo/index'
 import { CompanyInfo } from '~/components/experience/CompanyInfo/index.types'
 
@@ -25,6 +26,7 @@ export const EXPERIENCE: Record<JobID, CompanyInfo> = {
   Arcane,
   Cytora,
   BestBuyHealth,
+  Accro,
 }
 
 export const meta: MetaFunction = () => {
@@ -33,7 +35,7 @@ export const meta: MetaFunction = () => {
     {
       name: 'description',
       content:
-        'Look back in history at my experience working at Amazon, Mindful Chef, Arcane, Cytora & Best Buy Health',
+        'Look back in history at my experience working at Amazon, Mindful Chef, Arcane, Cytora, Best Buy Health & Accro',
     },
   ]
 }
@@ -44,7 +46,7 @@ const Experience = () => {
   const [experience, setExperience] = useState<JobID | undefined>()
 
   useEffect(() => {
-    if (isMobileDevice) setTimeout(() => setExperience('BestBuyHealth'), 700)
+    if (isMobileDevice) setTimeout(() => setExperience('Accro'), 700)
   }, [])
 
   const handleKeyPress = (e: KeyboardEvent) => {
